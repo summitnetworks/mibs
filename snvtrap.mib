@@ -1,0 +1,220 @@
+
+SNVTRAP-MIB DEFINITIONS ::= BEGIN
+
+IMPORTS
+enterprises    FROM RFC1155-SMI
+TRAP-TYPE      FROM RFC-1215;
+
+--
+summit                      OBJECT IDENTIFIER ::= { enterprises 43122 }
+vox                         OBJECT IDENTIFIER ::= { summit 1 }
+alarm                       OBJECT IDENTIFIER ::= { vox 5 }
+alarmTrap                   OBJECT IDENTIFIER ::= { alarm 1 }
+alarmClearTrap              OBJECT IDENTIFIER ::= { alarm 2 }
+
+
+snvAlarmDetailStr OBJECT-TYPE
+    SYNTAX DisplayString
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+      "This string provides a detailed description of the Event along with variable information."
+    ::= { alarm 10 }
+
+
+snvRSWfaultTrunkUnavailable TRAP-TYPE
+  ENTERPRISE alarmTrap
+  VARIABLES { snvAlarmDetailStr }
+  DESCRIPTION "Trunk is unavailable."
+ --#TYPE "Trunk Unavailable"
+ --#SUMMARY "Trunk Unavailable"
+ --#ARGUMENTS {}
+ --#SEVERITY MINOR
+ --#TIMEINDEX 100
+ --#STATE OPERATIONAL
+ --FIXED STRING : NOT PRESENT
+ --CUSTOM STRING : NOT PRESENT
+ --SEVERITY : 
+::= 16256
+
+snvRSWclearTrunkUnavailable TRAP-TYPE
+  ENTERPRISE alarmClearTrap
+  VARIABLES { snvAlarmDetailStr }
+  DESCRIPTION "Trunk is available."
+ --#TYPE "Trunk Available"
+ --#SUMMARY "Trunk Available"
+ --#ARGUMENTS {}
+ --#SEVERITY MINOR
+ --#TIMEINDEX 100
+ --#STATE OPERATIONAL
+ --FIXED STRING : NOT PRESENT
+ --CUSTOM STRING : NOT PRESENT
+ --SEVERITY : 
+::= 16256
+
+snvRSWfaultSGUnavailable TRAP-TYPE
+  ENTERPRISE alarmTrap
+  VARIABLES { snvAlarmDetailStr }
+  DESCRIPTION "Signalling Gateway is unavailable."
+ --#TYPE "SG Unavailable"
+ --#SUMMARY "SG Unavailable"
+ --#ARGUMENTS {}
+ --#SEVERITY MAJOR
+ --#TIMEINDEX 100
+ --#STATE OPERATIONAL
+ --FIXED STRING : NOT PRESENT
+ --CUSTOM STRING : NOT PRESENT
+ --SEVERITY : 
+::= 16257
+
+snvRSWclearSGUnavailable TRAP-TYPE
+  ENTERPRISE alarmClearTrap
+  VARIABLES { snvAlarmDetailStr }
+  DESCRIPTION "Signalling Gateway is available."
+ --#TYPE "SG Available"
+ --#SUMMARY "SG Available"
+ --#ARGUMENTS {}
+ --#SEVERITY MAJOR
+ --#TIMEINDEX 100
+ --#STATE OPERATIONAL
+ --FIXED STRING : NOT PRESENT
+ --CUSTOM STRING : NOT PRESENT
+ --SEVERITY : 
+::= 16257
+
+snvRSWfaultMGUnavailable TRAP-TYPE
+  ENTERPRISE alarmTrap
+  VARIABLES { snvAlarmDetailStr }
+  DESCRIPTION "Media Gateway is unavailable."
+ --#TYPE "MG Unavailable"
+ --#SUMMARY "MG Unavailable"
+ --#ARGUMENTS {}
+ --#SEVERITY MAJOR
+ --#TIMEINDEX 100
+ --#STATE OPERATIONAL
+ --FIXED STRING : NOT PRESENT
+ --CUSTOM STRING : NOT PRESENT
+ --SEVERITY : 
+::= 16258
+
+snvRSWclearMGUnavailable TRAP-TYPE
+  ENTERPRISE alarmClearTrap
+  VARIABLES { snvAlarmDetailStr }
+  DESCRIPTION "Media Gateway is available."
+ --#TYPE "MG Available"
+ --#SUMMARY "MG Available"
+ --#ARGUMENTS {}
+ --#SEVERITY MAJOR
+ --#TIMEINDEX 100
+ --#STATE OPERATIONAL
+ --FIXED STRING : NOT PRESENT
+ --CUSTOM STRING : NOT PRESENT
+ --SEVERITY : 
+::= 16258
+
+snvRSWfaultSGError TRAP-TYPE
+  ENTERPRISE alarmTrap
+  VARIABLES { snvAlarmDetailStr }
+  DESCRIPTION "Signalling gateway reported error."
+ --#TYPE "SG Error"
+ --#SUMMARY "SG Error"
+ --#ARGUMENTS {}
+ --#SEVERITY MINOR
+ --#TIMEINDEX 100
+ --#STATE OPERATIONAL
+ --FIXED STRING : NOT PRESENT
+ --CUSTOM STRING : NOT PRESENT
+ --SEVERITY : 
+::= 16270
+
+snvCLRfaultReferenceUnreachable TRAP-TYPE
+  ENTERPRISE alarmTrap
+  VARIABLES { snvAlarmDetailStr }
+  DESCRIPTION "Could not reach network reference."
+ --#TYPE "Network Reference Unreachable"
+ --#SUMMARY "Network Reference Unreachable"
+ --#ARGUMENTS {}
+ --#SEVERITY MAJOR
+ --#TIMEINDEX 100
+ --#STATE OPERATIONAL
+ --FIXED STRING : NOT PRESENT
+ --CUSTOM STRING : NOT PRESENT
+ --SEVERITY : 
+::= 25001
+
+snvCLRfaultAutomaticSwitchover TRAP-TYPE
+  ENTERPRISE alarmTrap
+  VARIABLES { snvAlarmDetailStr }
+  DESCRIPTION "Requesting switchover to standby side which is online."
+ --#TYPE "Automatic Switchover"
+ --#SUMMARY "Automatic Switchover"
+ --#ARGUMENTS {}
+ --#SEVERITY MAJOR
+ --#TIMEINDEX 100
+ --#STATE OPERATIONAL
+ --FIXED STRING : NOT PRESENT
+ --CUSTOM STRING : NOT PRESENT
+ --SEVERITY : 
+::= 25011
+
+snvCLRfaultAutomaticReplay TRAP-TYPE
+  ENTERPRISE alarmTrap
+  VARIABLES { snvAlarmDetailStr }
+  DESCRIPTION "Consistency operational local check replayed last switchover."
+ --#TYPE "Automatic Replay"
+ --#SUMMARY "Automatic Replay"
+ --#ARGUMENTS {}
+ --#SEVERITY MINOR
+ --#TIMEINDEX 100
+ --#STATE OPERATIONAL
+ --FIXED STRING : NOT PRESENT
+ --CUSTOM STRING : NOT PRESENT
+ --SEVERITY : 
+::= 25004
+
+snvCLRfaultMaintenanceMode TRAP-TYPE
+  ENTERPRISE alarmTrap
+  VARIABLES { snvAlarmDetailStr }
+  DESCRIPTION "Maintenance event ocurred."
+ --#TYPE "Maintenance"
+ --#SUMMARY "Maintenance"
+ --#ARGUMENTS {}
+ --#SEVERITY MINOR
+ --#TIMEINDEX 100
+ --#STATE OPERATIONAL
+ --FIXED STRING : NOT PRESENT
+ --CUSTOM STRING : NOT PRESENT
+ --SEVERITY : 
+::= 25021
+
+snvCLRfaultElementUnavailable TRAP-TYPE
+  ENTERPRISE alarmTrap
+  VARIABLES { snvAlarmDetailStr }
+  DESCRIPTION "Element is unavailable."
+ --#TYPE "Element Unavailable"
+ --#SUMMARY "Element Unavailable"
+ --#ARGUMENTS {}
+ --#SEVERITY CRITICAL
+ --#TIMEINDEX 100
+ --#STATE OPERATIONAL
+ --FIXED STRING : NOT PRESENT
+ --CUSTOM STRING : NOT PRESENT
+ --SEVERITY : 
+::= 25025
+
+snvCLRclearElementUnavailable TRAP-TYPE
+  ENTERPRISE alarmClearTrap
+  VARIABLES { snvAlarmDetailStr }
+  DESCRIPTION "Element is available."
+ --#TYPE "Element Available"
+ --#SUMMARY "Element Available"
+ --#ARGUMENTS {}
+ --#SEVERITY CRITICAL
+ --#TIMEINDEX 100
+ --#STATE OPERATIONAL
+ --FIXED STRING : NOT PRESENT
+ --CUSTOM STRING : NOT PRESENT
+ --SEVERITY : 
+::= 25025
+
+END
